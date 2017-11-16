@@ -3,7 +3,9 @@
 <h4>{{ tree.name }}</h4>
 <ol>
 {%- for item in tree.children recursive %}
-    {% if not item.children %}<li><img src='{{ item.path }}' width=100 height=100>{% endif %}
+    {% if not item.children %}
+	<li><img src='{{ item.path }}' width=100 height=100>
+    {% endif %}
     {%- if item.children -%}
         <h4>{{item.name}}</h4><ol>{{ loop(item.children) }}</ol>
     {%- endif %}</li>
