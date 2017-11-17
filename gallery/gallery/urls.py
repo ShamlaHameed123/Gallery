@@ -8,5 +8,6 @@ from main import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^gallery$', views.dirtree),
+    # url(r'^delete_image/(?P<path>[][0-9]+)/$', views.delete_image),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
