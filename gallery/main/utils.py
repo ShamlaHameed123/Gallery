@@ -15,5 +15,4 @@ def make_tree(path):
                 tree['children'].append(dict(name=name, path=path[media_position:]+"/"+name))
     except OSError:
         pass
-    print (tree)
     return tree

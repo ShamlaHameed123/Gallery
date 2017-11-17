@@ -10,3 +10,6 @@ class Photo(models.Model):
     rate = models.IntegerField(default=1, validators=[MaxValueValidator(5),
                                MinValueValidator(1)], null=True, blank=True)
     total_rating = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.title
