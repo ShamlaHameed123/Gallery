@@ -37,12 +37,36 @@ def delete_photo(request):
     return HttpResponseRedirect('/delete/')
 
 
+def score_board(request):
+    photos = Photo.objects.all().order_by('-rate')
+    filters = ['<','>','='] 
+    data = {
+          'photos': photos,
+          'filters': filters
+    	 }
+    return render(request, 'rating_board.html', data)
+
+def filter_result(request):
+    filters = str(request.POST['filters'])
+    offset = request.POST['offset']
+    if filters == '>':
+        photos = Photo.objects.filter(rate__gt=offset)
+    elif filters == '<':
+        photos = Photo.objects.filter(rate__lt=offset)
+    elif filters == '=':
+        photos = Photo.objects.filter(rate=offset)
+    filters = ['<','>','='] 
+    data = {
+          'photos': photos,
+          'filters': filters
+    	 }
+    return render(request, 'rating_board.html', data)    
+
 
 def rate_photo(request):
     rate_id = request.POST["rate"]
     file_path = str(rate_id.split(":")[0])
     rate_value = rate_id.split(":")[1]
-    print file_path, rate_value
     try:
         photo = Photo.objects.get(url=file_path)
         rate = RatePhoto(photo=photo)
@@ -52,9 +76,6 @@ def rate_photo(request):
         photo_rate = ratings.aggregate(Avg('rate'))
         photo_rate_count = ratings.count()
         photo.rate = photo_rate['rate__avg']
-        score = float(photo.rate) + 5 *\
-	    (1 - math.exp(-photo_rate_count / settings.RATING_PREFERENCE))
-        photo.score = score
         photo.save()
     except Photo.DoesNotExist:
         pass

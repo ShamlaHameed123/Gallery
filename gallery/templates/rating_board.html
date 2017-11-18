@@ -1,0 +1,29 @@
+<!doctype html>
+<title>Rating Board</title>
+<h4>Rating Board</h4>
+<ol>
+<form method="POST" class="post-form" action='/rate_filter/'>
+    {{ csrf_input }}
+  <select id="filters" name="filters">
+    {% for r_filter in filters %}
+        <option value="{{r_filter}}">{{r_filter}}</option>
+    {% endfor %}
+  <input type='number' name='offset' id='offset'>
+  <button type="submit" class="save btn btn-default">GO!</button>
+</form>
+</br>
+</br>
+</br>
+
+{% if not photos %}
+  No results to display
+{% else %}
+<table>
+<tr><td>Photo</td><td>Total Rate</td>
+{%- for item in photos %}
+	<tr><td><li><img src='{{ item.url }}' width=100 height=100 >&nbsp;</td><td>{{item.rate}}</td></li>
+  </tr>
+{%- endfor %}
+{% endif %}
+
+</ol>

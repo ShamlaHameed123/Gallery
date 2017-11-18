@@ -5,7 +5,7 @@
 <form method="POST" class="post-form" action='/rate/'>
 {%- for item in tree.children recursive %}
     {% if not item.children %}
-	<li><img src='{{ item.path }}' width=100 height=100 >
+	<li><img src='{{ item.path }}' width=100 height=100 >{{item.path}}
         {{ csrf_input }}
         {% for i in range(1,6) %}
             <input type="radio" id="i" name="rate" value={{item.path}}:{{i}}>
@@ -16,6 +16,8 @@
     {%- endif %}</li>
 {%- endfor %}
 <p>Go to<a href="/delete/"><b>&nbsp;Deletion</b></p></a>
+&nbsp;&nbsp;&nbsp;
+<p><a href="/score_board/"><b>&nbsp;Score&nbsp;Board</b></p></a>
 </br>
 <button type="submit" class="save btn btn-default">GO!</button>
 </form>
