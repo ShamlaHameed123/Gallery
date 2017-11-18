@@ -75,6 +75,10 @@ TEMPLATES = [
     },
 ]
 
+
+RATING_PREFERENCE = 28.00
+    
+
 WSGI_APPLICATION = 'gallery.wsgi.application'
 
 

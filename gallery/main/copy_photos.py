@@ -8,5 +8,5 @@ for dir_, _, files in os.walk(rootDir):
         relDir = os.path.relpath(dir_, rootDir)
         relFile = os.path.join(relDir, fileName)
         name = relFile.split("/")[1]
-        photo = Photo(title=name, location=relFile, rate=0)
+        photo = Photo(title=name, location=relFile)
         photo.save()
