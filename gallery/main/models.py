@@ -14,7 +14,7 @@ class Photo(models.Model):
                                default=Decimal('0.0'))
 
     def __str__(self):
-        return self.title
+        return self.title + "->" + str(self.rate)
 
     def save(self, *args, **kwargs):
         self.url = self.location.url
@@ -27,3 +27,6 @@ class RatePhoto(models.Model):
     '''
     photo = models.ForeignKey(Photo)
     rate = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.photo.title + "->" + str(self.rate)
