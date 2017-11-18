@@ -32,7 +32,7 @@ def delete_fe(request):
 def delete_photo(request):
     delete_post_url = str(request.POST['delete'])
     delete_url = delete_post_url.split(":")[1]
-    # Photo.objects.get(url=delete_url).delete()
+    Photo.objects.get(url=delete_url).delete()
     os.remove(settings.MEDIA_ROOT+delete_url[6:])
     return HttpResponseRedirect('/delete/')
 
